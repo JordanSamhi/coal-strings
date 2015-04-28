@@ -3,7 +3,8 @@
   Copyright (C) 2015 The Pennsylvania State University and the University of Wisconsin
   Systems and Internet Infrastructure Security Laboratory
 
-  Author: Damien Octeau
+  Authors: Daniel Luchaup
+           Damien Octeau
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -29,6 +30,17 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
+   <developers>
+    <developer>
+      <name>Daniel Luchaup</name>
+      <url>http://pages.cs.wisc.edu/~luchaup/</url>
+    </developer>
+    <developer>
+      <name>Damien Octeau</name>
+      <url>http://www.cse.psu.edu/~duo114/</url>
+    </developer>
+  </developers>
+
   <repositories>
     <repository>
       <id>soot-repo</id>
@@ -39,6 +51,19 @@
       </snapshots>
     </repository>
   </repositories>
+
+  <licenses>
+    <license>
+      <name>Apache 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <scm>
+    <url>https://github.com/siis/coal-strings</url>
+    <connection>scm:git:git://github.com/siis/coal-strings.git</connection>
+    <developerConnection>scm:git:git@github.com:siis/coal-strings.git</developerConnection>
+  </scm>
 
   <distributionManagement>
     <snapshotRepository>
@@ -85,4 +110,68 @@
     	<scope>test</scope>
     </dependency>
   </dependencies>
+
+  <profiles>
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>2.2.1</version>
+            <executions>
+              <execution>
+                <id>attach-sources</id>
+                <goals>
+                  <goal>jar-no-fork</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>2.9.1</version>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.5</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>1.6.3</version>
+            <extensions>true</extensions>
+            <configuration>
+              <serverId>ossrh</serverId>
+              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+              <autoReleaseAfterClose>true</autoReleaseAfterClose>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
