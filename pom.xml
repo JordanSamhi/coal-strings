@@ -26,6 +26,10 @@
   <artifactId>coal-strings</artifactId>
   <version>0.1.0</version>
 
+  <name>String Analysis for COAL</name>
+  <description>String Analysis for the COAL Solver.</description>
+  <url>http://siis.cse.psu.edu/coal/</url>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
