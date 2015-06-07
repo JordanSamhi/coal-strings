@@ -126,9 +126,10 @@ public class DBG {
     }
   }
 
-  public static void dbgStmt(String msg, Stmt s, int verbose) {
+  public static void dbgStmt(Stmt s, String msg, Object... args) {
     if (verbose_level > 10)
-      G.v().out.println("dbgStmt:" + msg + s + "' of type " + s.getClass().getName());
+      G.v().out.println("dbgStmt:" + String.format(msg, args) + " at stmt: " + s + " of type "
+          + s.getClass().getName());
   }
 
   public static void dbgFieldMap() {
@@ -185,7 +186,7 @@ public class DBG {
     Iterator<Unit> rDefsIt = defs.iterator();
     while (rDefsIt.hasNext()) {
       Stmt sdef = (Stmt) rDefsIt.next();
-      dbgStmt("definition:", sdef, 0);
+      dbgStmt(sdef, "definition:");
     }
     G.v().out.println("<<<<<<<<<<<<<<");
   }
@@ -193,9 +194,12 @@ public class DBG {
 
 // //////////////////////////////////////////////////////////////////////////
 class DBGExprVisitor implements JimpleValueSwitch {
+  static int verbose_level = 0;
+
   protected void show(String what, Value v) {
-    G.v().out.println(what + " v=" + v + "  of class= " + v.getClass().getName() + " type: "
-        + v.getType() + " type's class:" + v.getType().getClass().getName());
+    if (verbose_level > 5)
+      G.v().out.println(what + " v=" + v + "  of class= " + v.getClass().getName() + " type: "
+          + v.getType() + " type's class:" + v.getType().getClass().getName());
   }
 
   /*************************************************/

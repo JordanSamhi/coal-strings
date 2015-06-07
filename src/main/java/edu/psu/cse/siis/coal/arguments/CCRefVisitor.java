@@ -35,7 +35,7 @@ import soot.jimple.StaticFieldRef;
 import soot.jimple.Stmt;
 import soot.jimple.ThisRef;
 
-/* PROPAGATE CONSTRAINTS TO REFERENCES/CONTAINERS 
+/* PROPAGATE CONSTRAINTS TO REFERENCES/CONTAINERS
  Assume we have the following code
  s1:   $r3 = newarray (java.lang.String)[3];
  s2:   $r3[0] = "ARRAY0";
@@ -44,12 +44,12 @@ import soot.jimple.ThisRef;
  s4:   r1 = $r3;
  s5:   r2 = r1[1];
  s8:   use(r2);
- (in the following comment, the value of a statement is the value computed by  
+ (in the following comment, the value of a statement is the value computed by
  that statement and stored/included in the left operand/set)
  We model/abstract an array as a union of the set of its elements.
- Assume that we've just processed s2, and have just figured out the value of 
- s2 i.e. "ARRAY0". 
- How do we know that $r3 changes? We have to insert a constraint stating that 
+ Assume that we've just processed s2, and have just figured out the value of
+ s2 i.e. "ARRAY0".
+ How do we know that $r3 changes? We have to insert a constraint stating that
  the set of s2 is included in the set of s1.
  Similar for field references, using the appropriate abstraction.
  */
@@ -81,7 +81,8 @@ public class CCRefVisitor implements RefSwitch {
   }
 
   protected void dbg(String what, Value v) {
-    dbg0(what, v);
+    if (verbose_level > 5)
+      dbg0(what, v);
   }
 
   // ///////////////////////////////////////////////////////////////////////////

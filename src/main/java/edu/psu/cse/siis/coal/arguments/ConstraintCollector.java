@@ -122,11 +122,11 @@ public class ConstraintCollector {
     // DBG.print("DBG: handle-method="+method);
     // G.v().out.println("DBG: handle-method="+method);
     Body body = method.getActiveBody();
-    if (method.getName().equals("testMergePaths"))
-      G.v().out.println("DBG: handling-non-adjusted-body=" + body);
+    // if (method.getName().equals("testMergePaths"))
+    // G.v().out.println("DBG: handling-non-adjusted-body=" + body);
     AliasAdjuster.changeBody(body);
-    if (method.getName().equals("testMergePaths"))
-      G.v().out.println("DBG: handling-aliasadjusted-body=" + body);
+    // if (method.getName().equals("testMergePaths"))
+    // G.v().out.println("DBG: handling-aliasadjusted-body=" + body);
     ExceptionalUnitGraph cfg = new ExceptionalUnitGraph(body);
     // ConstraintCollector cc = new ConstraintCollector(cfg);
     CCVisitor method_svis = new CCVisitor(cfg);
@@ -143,9 +143,9 @@ public class ConstraintCollector {
       } else {
         visited.add(unit);
         Stmt s = (Stmt) unit;
-        DBG.dbgStmt("......... looking at:", s, 3);
+        DBG.dbgStmt(s, "......... looking");
         s.apply(method_svis);
-        DBG.dbgStmt("DONE looking and got lcb-for-s:" + Res2Constr.getStmt(s) + "; where s=", s, 0);
+        DBG.dbgStmt(s, "DONE looking and got lcb-for-s: %s", Res2Constr.getStmt(s));
       }
       for (Unit successor : cfg.getSuccsOf(unit)) {
         stack.push(successor);
