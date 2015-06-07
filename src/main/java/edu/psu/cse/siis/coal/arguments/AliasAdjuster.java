@@ -155,12 +155,12 @@ class AliasAdjuster extends BodyTransformer {
   }
 
   static boolean changeBody(Body body) {
-    boolean flag =
-        body.getMethod().getSignature()
-            .equals("<com.google.ads.a.j: java.lang.String a(java.util.Map,android.app.Activity)>");
-    if (flag) {
-      System.out.println("Changing body");
-    }
+    // boolean flag =
+    // body.getMethod().getSignature()
+    // .equals("<com.google.ads.a.j: java.lang.String a(java.util.Map,android.app.Activity)>");
+    // if (flag) {
+    // System.out.println("Changing body");
+    // }
     Chain<Unit> units = body.getUnits();
     SootMethod sm = body.getMethod();
     String sm_string = sm.toString();
@@ -181,16 +181,16 @@ class AliasAdjuster extends BodyTransformer {
         // if (match_specialinvoke_StringBuilder_init(s, ad))
         // G.v().out.println("dbg:match_specialinvoke_StringBuilder_init:"+ad);
         if (match_virtualinvoke_StringBuilder_XXX(s, ad)) {
-          DBG.print("dbg:match_virtualinvoke_StringBuilder_XXX" + ad);
+          DBG.print("dbg:match_virtualinvoke_StringBuilder_XXX%s", ad);
           if (ad.left == null) {
             // Changing this is always safe...
             // virtualinvoke $r3.<java.lang.StringBuilder: java.lang.StringBuilder
             // append(java.lang.String)>("CHAIN");
             if (try2change) {
               AssignStmt newInvoke = Jimple.v().newAssignStmt(ad.base, ad.iexpr);
-              if (flag) {
-                System.out.println("Inserting " + newInvoke);
-              }
+              // if (flag) {
+              // System.out.println("Inserting " + newInvoke);
+              // }
               units.insertAfter(newInvoke, s);
               units.remove(s);
               last_changed = true;

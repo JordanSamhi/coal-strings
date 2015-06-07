@@ -109,9 +109,9 @@ public class DBG {
     }
   }
 
-  public static void print(String what) {
+  public static void print(String what, Object... args) {
     if (verbose_level > 10)
-      G.v().out.println(what);
+      G.v().out.println(String.format(what, args));
   }
 
   public static void dbgfIELD(StaticFieldRef sfr) {

@@ -316,9 +316,10 @@ class CCVisitor implements StmtSwitch {
     ccExprVisitor = new CCExprVisitor(this, sm);
   }
 
-  protected void dbg(String what, Stmt s) {
+  protected void dbg(String what, Stmt s, Object... args) {
     if (verbose_level > 10)
-      G.v().out.println("DBG:CCVisitor." + what + " " + s + "  class= " + s.getClass().getName());
+      G.v().out.println("DBG:CCVisitor." + String.format(what, args) + " " + s + "  class= "
+          + s.getClass().getName());
   }
 
   protected void dbg(String what) {
@@ -457,7 +458,7 @@ class CCVisitor implements StmtSwitch {
     LanguageConstraints.Box rop_lcb = ccExprVisitor.eval(rop, stmt);
     Res2Constr.putStmt(stmt, rop_lcb);
 
-    dbg("DBG:CCVisitor.caseIdentityStmt:rop" + rop + "  class= " + rop.getClass().getName());
+    dbg("caseIdentityStmt:rop %s class= %s", stmt, rop, rop.getClass().getName());
   }
 
   @Override
