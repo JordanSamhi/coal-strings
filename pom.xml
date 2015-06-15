@@ -105,7 +105,7 @@
     <dependency>
       <groupId>soot</groupId>
       <artifactId>soot</artifactId>
-      <version>20140210</version>
+      <version>20150607</version>
     </dependency>
     <dependency>
     	<groupId>junit</groupId>

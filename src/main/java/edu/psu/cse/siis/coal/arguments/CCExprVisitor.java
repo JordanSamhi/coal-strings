@@ -48,6 +48,7 @@ import soot.jimple.LeExpr;
 import soot.jimple.LengthExpr;
 import soot.jimple.LongConstant;
 import soot.jimple.LtExpr;
+import soot.jimple.MethodHandle;
 import soot.jimple.MulExpr;
 import soot.jimple.NeExpr;
 import soot.jimple.NegExpr;
@@ -467,5 +468,10 @@ public class CCExprVisitor implements JimpleValueSwitch {
   @Override
   public void defaultCase(Object o) {
     G.v().out.println("DBG:ccExprVisitor.defaultCase" + o + " class= " + o.getClass().getName());
+  }
+
+  @Override
+  public void caseMethodHandle(MethodHandle handle) {
+    throw new RuntimeException("MethodHandle not handled.");
   }
 }
