@@ -24,7 +24,7 @@
 
   <groupId>edu.psu.cse.siis</groupId>
   <artifactId>coal-strings</artifactId>
-  <version>0.1.2-SNAPSHOT</version>
+  <version>0.1.2</version>
 
   <name>String Analysis for COAL</name>
   <description>String Analysis for the COAL Solver.</description>
